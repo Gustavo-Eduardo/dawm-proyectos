@@ -1,0 +1,51 @@
+@media only screen and (min-device-width: 480px) and (max-device-width: 840px) {
+  nav > ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  nav > ul > li {
+    width: 60%;
+  }
+
+  table#skills {
+    display: none;
+  }
+
+  ul#skills {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    padding: 0.7rem;
+    border-radius: 10px;
+    border: 1px solid #ff9494;
+    width: 100%;
+    background-color: #ffe3e1;
+  }
+
+  ul#skills > li {
+    list-style: none;
+  }
+
+  form {
+    display: grid;
+    grid-template-columns: 100%;
+    margin: 0 auto;
+    width: 80%;
+    row-gap: 0.5rem;
+  }
+
+  form > button {
+    grid-column: 1;
+  }
+
+  div#social_networks ul {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+}
