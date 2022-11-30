@@ -1,0 +1,12 @@
+#pokemon-types .column {
+    height: 500px;
+  max-width: 70%;
+  margin: 0 auto;
+}
+
+#pokemon-secondary-types .bar
+{height: 200px;
+max-width: 70%;
+margin: 0 auto;
+}
+
