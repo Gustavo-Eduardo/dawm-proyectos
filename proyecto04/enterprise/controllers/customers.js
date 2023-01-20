@@ -1,5 +1,5 @@
-const Customer = require('../models');
-const PaginationService = require('./PaginationService');
+const Customer = require('../models').customers;
+const PaginationService = require('../services/pagination');
 const customerPagination = new PaginationService(Customer);
 
 exports.getCustomers = async (req, res) => {
