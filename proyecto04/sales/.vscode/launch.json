@@ -1,11 +1,1 @@
-{
-    "configurations": [
-        {
-            "name": "Launch Edge",
-            "request": "launch",
-            "type": "msedge",
-            "url": "http://192.168.100.165:3002",
-            "webRoot": "${workspaceFolder}"
-        }
-    ]
-}
+{}
