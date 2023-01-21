@@ -1,7 +1,9 @@
+import Redirect from "../../components/Redirect"
+
 function NotFound() {
-    return <div>
-        <h1> NotFound </h1>
-    </div>
+  return (
+    <Redirect path={"/customers"} />
+  );
 }
 
-export default NotFound
+export default NotFound;
