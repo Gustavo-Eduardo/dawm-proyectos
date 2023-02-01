@@ -23,8 +23,8 @@ exports.getCustomerOrders = async (req, res) => {
     const limit = +req.query.limit || 10
     const offset = (page - 1) * limit
     const customerNumber = +req.params.customerId
-    const orders = await ordersModel.find({ customerNumber }, null, { skip: offset, limit }).lean()
-    const totalOrders = await ordersModel.find({ customerNumber }, { _id: 1 }) // projection to optimize call
+    const orders = await ordersModel.find({ customerNumber, status: "Shipped" }, null, { skip: offset, limit }).lean()
+    const totalOrders = await ordersModel.find({ customerNumber, status: "Shipped" }, { _id: 1 }) // projection to optimize call
 
     res.send({
         data: orders,
