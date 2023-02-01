@@ -10,3 +10,9 @@ exports.getCustomerOrders = async (req, res) => {
     res.send(response.data)
 }
 
+exports.calculateTotal = async (req, res) => {
+    const orders = req.body
+    const total = orders.reduce((acc, order) => acc + (order.priceEach * order.quantityOrdered), 0)
+    res.send({ total })
+}
+
