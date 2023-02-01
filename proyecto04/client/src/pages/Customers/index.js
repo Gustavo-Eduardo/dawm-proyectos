@@ -1,9 +1,10 @@
 import { Box, Button, ButtonGroup, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import OrdersDialog from "../../components/OrdersDialog";
 import { getCustomers } from "../../services/customers";
 
 
-function CustomersTable({ customers }) {
+function CustomersTable({ customers, selectCustomer, customerRef }) {
 
   return <TableContainer component={Paper}>
     <Table aria-label="simple table">
@@ -29,8 +30,11 @@ function CustomersTable({ customers }) {
             <TableCell align="right">{`${customer.contactFirstName} ${customer.contactLastName}`}</TableCell>
             <TableCell align="right">{customer.phone}</TableCell>
             <TableCell align="right">
-              <Button>
-                Customer Orders
+              <Button variant="contained" onClick={() => {
+                selectCustomer(customer.customerNumber)
+                customerRef.current.open()
+              }}>
+                View
               </Button>
             </TableCell>
           </TableRow>
@@ -48,6 +52,11 @@ function Customers() {
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
   const [limit, setLimit] = useState(10)
+  const [selectedCustomer, setSelectedCustomer] = useState(null)
+
+  const customerRef = useRef()
+
+
 
   const loadCustomers = useCallback(async () => {
     try {
@@ -75,7 +84,7 @@ function Customers() {
   return (
     <div>
       {!customers.length ? <h1> Loading </h1> : (<Box sx={{ opacity: loading ? "50%" : "100%" }}>
-        <CustomersTable customers={customers} />
+        <CustomersTable customers={customers} selectCustomer={(customerId) => { setSelectedCustomer(customerId) }} customerRef={customerRef} />
         <Box display={"flex"} margin={2} justifyContent={"flex-end"} alignItems={"center"}>
           <Typography sx={{ mr: 1 }}>
             {`Items/page: `}
@@ -104,6 +113,7 @@ function Customers() {
         </Box>
       </Box>
       )}
+      <OrdersDialog customerId={selectedCustomer} ref={customerRef} />
     </div>
   );
 }
