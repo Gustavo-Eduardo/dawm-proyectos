@@ -5,7 +5,8 @@ exports.getCustomerOrders = async (req, res) => {
     const page = +req.query.page || 1
     const limit = +req.query.limit || 10
     const url = process.env.SALES_URL + "/api/orders/customer/" + customerId
-    const response = await axios.get(url, { params: { page, limit } })
-    res.send(response)
+    const proxy = { host: process.env.SALES_HOST, port: process.env.SALES_PORT }
+    const response = await axios.get(url, { params: { page, limit, proxy } })
+    res.send(response.data)
 }
 
