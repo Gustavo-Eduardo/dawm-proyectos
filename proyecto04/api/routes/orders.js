@@ -1,8 +1,7 @@
 const express = require("express")
 const router = express.Router()
+const ordersController = require("../controllers/orders")
 
-router.get('/', (req, res) => {
-    res.send("orders")
-})
+router.get('/customer/:customerId', ordersController.getCustomerOrders)
 
 module.exports = router
