@@ -1,5 +1,4 @@
 const ordersModel = require("../models/orders")
-const productsModel = require("../models/products")
 
 exports.getOrders = async (req, res) => {
     const orders = await ordersModel.find().lean()
