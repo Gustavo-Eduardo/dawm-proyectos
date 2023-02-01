@@ -15,7 +15,7 @@ const ordersSchema = Schema({
     orderLineNumber: Number,
     productName: String,
     productLine: String,
-    productScale: Number,
+    productScale: String,
     productVendor: String,
     productDescription: String,
     quantityInStock: Number,
