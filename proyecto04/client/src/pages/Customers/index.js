@@ -1,5 +1,5 @@
 import { Box, Button, ButtonGroup, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getCustomers } from "../../services/customers";
 
 
@@ -49,7 +49,7 @@ function Customers() {
   const [totalPages, setTotalPages] = useState(1)
   const [limit, setLimit] = useState(10)
 
-  async function loadCustomers() {
+  const loadCustomers = useCallback(async () => {
     try {
       setLoading(true)
       const response = await getCustomers(page, limit)
@@ -57,16 +57,19 @@ function Customers() {
       setCustomers(response.data)
       setTotalItems(metadata.totalItems)
       setTotalPages(metadata.totalPages)
+      if (page > metadata.totalPages) {
+        setPage(1)
+      }
       setLoading(false)
     } catch (error) {
       console.error(error)
     }
 
-  }
+  }, [limit, page])
 
   useEffect(() => {
     loadCustomers()
-  }, [page, limit])
+  }, [page, limit, loadCustomers])
 
 
   return (
